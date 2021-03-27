@@ -1,0 +1,7 @@
+dependencies {
+    //room sql
+    implementation "androidx.room:room-runtime:$rootProject.room"
+    testImplementation "androidx.room:room-testing:$rootProject.room"
+    implementation "androidx.room:room-rxjava2:$rootProject.room"
+    kapt "androidx.room:room-compiler:$rootProject.room"
+}

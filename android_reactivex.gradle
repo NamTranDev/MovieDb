@@ -1,0 +1,7 @@
+dependencies {
+    // Reactive
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rx_android"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rxkotlin"
+    implementation "io.reactivex.rxjava2:rxjava:2.2.13"
+
+}

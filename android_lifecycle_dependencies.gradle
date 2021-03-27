@@ -1,0 +1,7 @@
+dependencies {
+    // Architecture Components
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycle"
+    kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycle"
+}

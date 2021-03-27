@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: '../android_core_dependencies.gradle'
+apply from: '../android_lifecycle_dependencies.gradle'
+apply from: '../android_navigation_libs.gradle'
+apply from: '../android_di.gradle'
+apply from: '../android_reactivex.gradle'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+    
+    buildTypes {
+        release {
+            debuggable rootProject.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.java_version
+        targetCompatibility rootProject.java_version
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+}
+
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation "junit:junit:$rootProject.junit"
+    androidTestImplementation "androidx.test:runner:$rootProject.runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso"
+
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.core_testing"
+    androidTestImplementation "androidx.test:runner:$rootProject.runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso"
+    androidTestImplementation "org.mockito:mockito-core:$rootProject.mockito_core"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation project(path: ':common')
+}

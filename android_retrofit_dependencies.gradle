@@ -1,0 +1,13 @@
+dependencies {
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
+    implementation "com.squareup.retrofit2:retrofit-mock:$rootProject.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit"
+
+    // OkHttp
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp_logging_interceptor"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp_logging_interceptor"
+
+}

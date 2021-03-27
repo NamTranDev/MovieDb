@@ -1,0 +1,16 @@
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    // Android support
+    implementation "androidx.appcompat:appcompat:$rootProject.appCompat"
+    implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.support"
+    implementation "androidx.cardview:cardview:$rootProject.support"
+    implementation "com.google.android.material:material:$rootProject.support"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.support"
+    implementation "androidx.legacy:legacy-support-core-utils:$rootProject.support"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    implementation "androidx.annotation:annotation:$rootProject.support"
+    implementation "androidx.fragment:fragment:$rootProject.fragment"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$rootProject.refreshLayout"
+}

@@ -1,0 +1,62 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: '../android_di.gradle'
+apply from: '../android_reactivex.gradle'
+apply from: '../android_room.gradle'
+apply from: '../android_retrofit_dependencies.gradle'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+
+        buildConfigField "String", "LINK_RSS", "\"https://vnexpress.net/rss/tin-moi-nhat.rss\""
+        buildConfigField "String", "DB_KEY", "\"NamTranDev\""
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            debuggable rootProject.debug
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.java_version
+        targetCompatibility rootProject.java_version
+    }
+
+    sourceSets {
+        androidTest.java.srcDirs += "src/test-common/java"
+        test.java.srcDirs += "src/test-common/java"
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+}
+
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation "junit:junit:$rootProject.junit"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    testImplementation "org.mockito:mockito-core:$rootProject.mockito_core"
+    implementation project(path: ':common')
+}

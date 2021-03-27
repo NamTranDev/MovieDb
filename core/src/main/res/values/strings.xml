@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ErrorResource Message -->
+    <string name="error_unknown">Không thể truy xuất dữ liệu. Vui lòng thử lại!</string>
+    <string name="error_no_internet_connection">Không có kết nối internet</string>
+    <string name="error_timeout">Lỗi hết thời gian. Vui lòng thử lại!</string>
+    <string name="error_connection_refused">Lỗi kết nối. Vui lòng thử lại!</string>
+
+    <string name="unknown_error">Lỗi không xác định</string>
+    <string name="bt_retry">Thử lại</string>
+    <string name="text_ok">Đồng ý</string>
+    <string name="text_retry">Thử lại</string>
+    <string name="text_yes">Đồng ý</string>
+    <string name="text_no">Không</string>
+    <string name="text_cancel">Hủy</string>
+    <string name="title_error">Lỗi</string>
+
+</resources>

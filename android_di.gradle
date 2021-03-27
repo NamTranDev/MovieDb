@@ -1,0 +1,8 @@
+dependencies {
+    // Dagger2
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger2"
+    implementation "com.google.dagger:dagger:$rootProject.dagger2"
+    implementation "com.google.dagger:dagger-android:$rootProject.dagger2"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger2"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger2"
+}
