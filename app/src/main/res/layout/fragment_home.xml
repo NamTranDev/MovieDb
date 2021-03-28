@@ -1,15 +1,362 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="viewModel"
+            type="nam.tran.moviedb.view.home.HomeViewModel" />
+
+        <variable
+            name="view"
+            type="nam.tran.moviedb.view.home.HomeFragment" />
+
+        <import type="android.view.View" />
+
+        <import type="tran.nam.state.Status" />
+
+        <import type="tran.nam.state.State" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#F2F2F2"
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="@dimen/positive_5dp"
+            app:cardPreventCornerOverlap="false"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/positive_24dp"
+                android:layout_height="@dimen/positive_24dp"
+                android:layout_gravity="start"
+                android:layout_margin="@dimen/positive_10dp"
+                app:srcCompat="@drawable/ic_user" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="@dimen/positive_30dp"
+                android:layout_height="@dimen/positive_30dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/image_logo" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/positive_24dp"
+                android:layout_height="@dimen/positive_24dp"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/positive_10dp"
+                app:srcCompat="@drawable/ic_search" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/pullToRefresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Home"
-            android:gravity="center"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:refreshView="@{viewModel.status}">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/title_trending"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/positive_10dp"
+                        android:text="Trending"
+                        android:textAllCaps="true"
+                        android:textColor="#3E4A59"
+                        android:textSize="@dimen/text_size_15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/positive_24dp"
+                        android:layout_height="@dimen/positive_24dp"
+                        android:layout_marginEnd="@dimen/positive_10dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/title_trending"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/title_trending"
+                        app:srcCompat="@drawable/ic_loadmore" />
+
+                    <FrameLayout
+                        android:id="@+id/contain_trending"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/title_trending">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_trending"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/adapter_movie_trending" />
+
+                        <ProgressBar
+                            android:id="@+id/loading_trending"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:visibility="gone" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_status_trending"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:padding="@dimen/positive_10dp"
+                            android:textColor="#3E4A59"
+                            android:textSize="@dimen/text_size_12sp"
+                            android:visibility="gone"
+                            tools:text="Error rồi"
+                            tools:visibility="visible" />
+                    </FrameLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/title_genre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/positive_10dp"
+                        android:text="Genre"
+                        android:textAllCaps="true"
+                        android:textColor="#3E4A59"
+                        android:textSize="@dimen/text_size_15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@+id/contain_trending" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/positive_24dp"
+                        android:layout_height="@dimen/positive_24dp"
+                        android:layout_marginEnd="@dimen/positive_10dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/title_genre"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/title_genre"
+                        app:srcCompat="@drawable/ic_loadmore" />
+
+                    <FrameLayout
+                        android:id="@+id/contain_genre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/title_genre">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_status_genre"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:padding="@dimen/positive_10dp"
+                            android:text="@{view.getErrorMessage(viewModel.status)}"
+                            android:textColor="#3E4A59"
+                            android:textSize="@dimen/text_size_12sp"
+                            android:visibility="@{viewModel.status.errorState != null ? View.VISIBLE : View.GONE}"
+                            tools:text="Error rồi" />
+
+                        <ProgressBar
+                            android:id="@+id/loading_genre"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:visibility="@{viewModel.status.status == Status.LOADING ? View.VISIBLE : View.GONE}" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_genre"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/adapter_genre" />
+                    </FrameLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/title_popular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/positive_10dp"
+                        android:text="Popular"
+                        android:textAllCaps="true"
+                        android:textColor="#3E4A59"
+                        android:textSize="@dimen/text_size_15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@+id/contain_genre" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/positive_24dp"
+                        android:layout_height="@dimen/positive_24dp"
+                        android:layout_marginEnd="@dimen/positive_10dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/title_popular"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/title_popular"
+                        app:srcCompat="@drawable/ic_loadmore" />
+
+                    <FrameLayout
+                        android:id="@+id/contain_popular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/title_popular">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_popular"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/adapter_movie" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_status_popular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:padding="@dimen/positive_10dp"
+                            android:textColor="#3E4A59"
+                            android:textSize="@dimen/text_size_12sp"
+                            android:visibility="gone"
+                            tools:text="Error rồi"
+                            tools:visibility="visible" />
+
+                        <ProgressBar
+                            android:id="@+id/loading_popular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:visibility="gone" />
+                    </FrameLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/title_top_rated"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/positive_10dp"
+                        android:text="Top Rated"
+                        android:textAllCaps="true"
+                        android:textColor="#3E4A59"
+                        android:textSize="@dimen/text_size_15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@+id/contain_popular" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/positive_24dp"
+                        android:layout_height="@dimen/positive_24dp"
+                        android:layout_marginEnd="@dimen/positive_10dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/title_top_rated"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/title_top_rated"
+                        app:srcCompat="@drawable/ic_loadmore" />
+
+                    <FrameLayout
+                        android:id="@+id/contain_top_rated"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/title_top_rated">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_top_rated"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/adapter_movie" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_status_top_rated"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:padding="@dimen/positive_10dp"
+                            android:textColor="#3E4A59"
+                            android:textSize="@dimen/text_size_12sp"
+                            android:visibility="gone"
+                            tools:text="Error rồi"
+                            tools:visibility="visible" />
+
+                        <ProgressBar
+                            android:id="@+id/loading_top_rated"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:visibility="gone" />
+                    </FrameLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/title_upcoming"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/positive_10dp"
+                        android:text="Upcoming"
+                        android:textAllCaps="true"
+                        android:textColor="#3E4A59"
+                        android:textSize="@dimen/text_size_15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@+id/contain_top_rated" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/positive_24dp"
+                        android:layout_height="@dimen/positive_24dp"
+                        android:layout_marginEnd="@dimen/positive_10dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/title_upcoming"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/title_upcoming"
+                        app:srcCompat="@drawable/ic_loadmore" />
+
+                    <FrameLayout
+                        android:id="@+id/contain_upcoming"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/title_upcoming">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_upcoming"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/adapter_movie" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_status_upcoming"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:padding="@dimen/positive_10dp"
+                            android:textColor="#3E4A59"
+                            android:textSize="@dimen/text_size_12sp"
+                            android:visibility="gone"
+                            tools:text="Error rồi"
+                            tools:visibility="visible" />
+
+                        <ProgressBar
+                            android:id="@+id/loading_upcoming"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:visibility="gone" />
+                    </FrameLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

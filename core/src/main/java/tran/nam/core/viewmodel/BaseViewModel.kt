@@ -9,12 +9,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import tran.nam.common.SingleLiveEvent
-import tran.nam.state.Loading
-import tran.nam.state.State
 import tran.nam.common.ErrorResponse
 import tran.nam.common.ErrorState
 import tran.nam.common.Logger
+import tran.nam.common.SingleLiveEvent
+import tran.nam.state.Loading
+import tran.nam.state.State
 import java.lang.ref.WeakReference
 
 open class BaseViewModel : ViewModel(),

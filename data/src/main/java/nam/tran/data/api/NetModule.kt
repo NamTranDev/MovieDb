@@ -53,7 +53,7 @@ class NetModule {
     @Provides
     @Singleton
     fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
-        val API_URL = ""
+        val API_URL = "https://api.themoviedb.org/"
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(API_URL)

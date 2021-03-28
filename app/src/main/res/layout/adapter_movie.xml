@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="nam.tran.data.model.MovieModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/positive_120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/positive_10dp"
+        android:layout_marginEnd="@dimen/positive_5dp"
+        android:layout_margin="@dimen/positive_5dp"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/image"
+            app:cardCornerRadius="@dimen/positive_5dp"
+            app:cardElevation="@dimen/positive_20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/positive_160dp"
+                android:scaleType="centerCrop"
+                app:link="@{item.image}"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/positive_40dp"
+            android:ellipsize="end"
+            android:gravity="center|top"
+            android:maxLines="2"
+            android:padding="@dimen/positive_5dp"
+            android:textColor="#3E4A59"
+            android:textSize="@dimen/text_size_12sp"
+            android:textStyle="bold"
+            android:text="@{item.title}"
+            app:layout_constraintEnd_toEndOf="@+id/image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image"
+            tools:text="Wonder Woman" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/title"
+            app:layout_constraintTop_toTopOf="@+id/title"
+            android:layout_margin="@dimen/positive_5dp"
+            app:srcCompat="@drawable/ic_more" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

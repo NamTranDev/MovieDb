@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
+import nam.tran.data.interactor.IHomeUseCase
 import tran.nam.core.di.inject.ViewModelKey
 
 @Module(includes = [HomeModule.ProvideViewModel::class])
@@ -21,8 +22,8 @@ abstract class HomeModule {
         @Provides
         @IntoMap
         @ViewModelKey(HomeViewModel::class)
-        fun provideViewModel(): ViewModel =
-            HomeViewModel()
+        fun provideViewModel(useCase : IHomeUseCase): ViewModel =
+            HomeViewModel(useCase)
     }
 
     @Module

@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'com.jakewharton.butterknife'
+
 apply from: '../android_core_dependencies.gradle'
 apply from: '../android_lifecycle_dependencies.gradle'
 apply from: '../android_navigation_libs.gradle'
@@ -61,6 +63,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 kapt {
@@ -90,4 +96,11 @@ dependencies {
     implementation project(':core')
     implementation project(':data')
     implementation project(':common')
+
+    implementation 'androidx.paging:paging-runtime-ktx:2.1.2'
+
+    implementation "com.airbnb.android:epoxy:4.4.4"
+    implementation "com.airbnb.android:epoxy-databinding:4.4.4"
+    implementation 'com.airbnb.android:epoxy-paging:2.18.0'
+    kapt "com.airbnb.android:epoxy-processor:4.4.4"
 }
