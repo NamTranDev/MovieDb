@@ -17,7 +17,8 @@
         android:layout_marginStart="@dimen/positive_10dp"
         android:layout_marginEnd="@dimen/positive_5dp"
         app:cardCornerRadius="@dimen/positive_5dp"
-        app:cardElevation="@dimen/positive_5dp">
+        app:cardElevation="@dimen/positive_5dp"
+        app:loadbackgroundColor="@{item.colorRandom}">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"

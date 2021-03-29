@@ -96,14 +96,23 @@ class HomeViewModel constructor(private val mUseCase: IHomeUseCase) : BaseViewMo
     val genreData: LiveData<MutableList<GenreModel>>
         get() = _genreData
 
+    private val _trendingData = MutableLiveData<MutableList<MovieModel>>()
+    val trendingData: LiveData<MutableList<MovieModel>>
+        get() = _trendingData
+
     override fun onInitialized(bundle: Bundle?, isRefresh: Boolean) {
         if (requestPopular.value == null || requestTopRated.value == null || requestUpcoming.value == null || isRefresh) {
-            execute<MutableList<GenreModel>>(mUseCase.listGenre(), {
-                _genreData.value = it
-            },typeLoading = Loading.LOADING_NORMAL)
             requestPopular.value = MovieRequest(MovieType.POPULAR)
             requestTopRated.value = MovieRequest(MovieType.TOPRATE)
             requestUpcoming.value = MovieRequest(MovieType.UPCOMING)
+            execute<Pair<MutableList<MovieModel>, MutableList<GenreModel>>>(
+                mUseCase.trendingAndGenre(),
+                {
+                    _trendingData.value = it?.first
+                    _genreData.value = it?.second
+                },
+                typeLoading = Loading.LOADING_NORMAL
+            )
         }
     }
 }

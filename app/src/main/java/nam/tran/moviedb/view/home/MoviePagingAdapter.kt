@@ -25,7 +25,7 @@ class MoviePagingAdapter(
     override fun areContentsTheSame(oldItem: MovieModel, newItem: MovieModel): Boolean {
         return oldItem.title == newItem.title
     }
-}), INetworkState {
+}) {
 
     private var networkState: State? = null
 
@@ -76,7 +76,7 @@ class MoviePagingAdapter(
         return super.getItemCount() + if (hasExtraRow()) 1 else 0
     }
 
-    override fun setNetworkState(newNetworkState: State?) {
+    fun setNetworkState(newNetworkState: State?) {
         val previousState = this.networkState
         val hadExtraRow = hasExtraRow()
         this.networkState = newNetworkState

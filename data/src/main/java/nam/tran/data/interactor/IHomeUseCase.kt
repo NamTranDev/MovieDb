@@ -6,7 +6,8 @@ import nam.tran.data.model.HomeMovieModel
 import nam.tran.data.model.MovieModel
 
 interface IHomeUseCase  {
-    fun listTrending(page : Int) : Observable<MutableList<MovieModel>>
+    fun trendingAndGenre() : Observable<Pair<MutableList<MovieModel>,MutableList<GenreModel>>>
+    fun listTrending() : Observable<MutableList<MovieModel>>
     fun listGenre() : Observable<MutableList<GenreModel>>
     fun listPopular(page : Int) : Observable<MutableList<MovieModel>>
     fun listTopRated(page : Int) : Observable<MutableList<MovieModel>>

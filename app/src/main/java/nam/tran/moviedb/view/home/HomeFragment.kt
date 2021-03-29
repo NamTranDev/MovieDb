@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_home.*
 import nam.tran.data.model.MovieModel
 import nam.tran.moviedb.R
+import nam.tran.moviedb.binding.Binding.getErrorMessage
 import nam.tran.moviedb.databinding.FragmentHomeBinding
 import tran.nam.common.ErrorCode
 import tran.nam.core.biding.FragmentDataBindingComponent
@@ -26,12 +27,14 @@ class HomeFragment : BaseFragmentVM<FragmentHomeBinding, HomeViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mViewDataBinding?.viewModel = mViewModel
+
         pullToRefresh?.setOnRefreshListener {
             mViewModel.onInitialized(arguments, true)
             pullToRefresh?.isRefreshing = false
         }
 
-        val adapterTrending = MovieTrendingPagingAdapter(dataBindingComponent) {
+        val adapterTrending = MovieTrendingAdapter(dataBindingComponent) {
             goToDetail(it)
         }
         rv_trending?.adapter = adapterTrending
@@ -51,6 +54,10 @@ class HomeFragment : BaseFragmentVM<FragmentHomeBinding, HomeViewModel>() {
         rv_upcoming?.adapter = adapterUpcoming
 
         mViewDataBinding?.viewModel = mViewModel
+
+        mViewModel.trendingData.observe(viewLifecycleOwner, Observer {
+            adapterTrending.submitList(it)
+        })
 
         mViewModel.genreData.observe(viewLifecycleOwner, Observer {
             adapterGenre.submitList(it)
@@ -103,7 +110,7 @@ class HomeFragment : BaseFragmentVM<FragmentHomeBinding, HomeViewModel>() {
 
     private fun updateStatus(
         state: State,
-        adapter: INetworkState,
+        adapter: MoviePagingAdapter,
         process: ProgressBar?,
         text: TextView?,
         rv: RecyclerView?
@@ -129,17 +136,6 @@ class HomeFragment : BaseFragmentVM<FragmentHomeBinding, HomeViewModel>() {
             }
         } else {
             adapter.setNetworkState(state)
-        }
-    }
-
-    fun getErrorMessage(state: State): String {
-        return state.errorState?.message ?: when (state.errorState?.code) {
-            ErrorCode.SOCKET_TIMEOUT_EXCEPTION.code -> "Không thể thiết lập kết nối đến máy chủ. Vui lòng kiểm tra lại mạng hoặc thử lại sau!"
-            ErrorCode.UNKNOWN_HOST_EXCEPTION.code -> "Không thể tìm thấy máy chủ. Vui lòng kiểm tra cài đặt!"
-            ErrorCode.SSL_HAND_SHAKE_EXCEPTION.code -> "Không thể tìm thấy máy chủ. Vui lòng kiểm tra cài đặt!"
-            ErrorCode.MALFORMED_JSON_EXCEPTION.code -> "Không thể thiết lập kết nối đến máy chủ. Vui lòng kiểm tra lại mạng hoặc thử lại sau!"
-            ErrorCode.PARSE_EXCEPTION.code -> "Có lỗi khi xử lý dữ liệu. Vui lòng thử lại sau!"
-            else -> "Có lỗi khi kết nối. Vui lòng thao tác lại."
         }
     }
 }

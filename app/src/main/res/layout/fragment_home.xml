@@ -9,15 +9,13 @@
             name="viewModel"
             type="nam.tran.moviedb.view.home.HomeViewModel" />
 
-        <variable
-            name="view"
-            type="nam.tran.moviedb.view.home.HomeFragment" />
-
         <import type="android.view.View" />
 
         <import type="tran.nam.state.Status" />
 
         <import type="tran.nam.state.State" />
+
+        <import type="nam.tran.moviedb.binding.Binding"/>
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -107,25 +105,23 @@
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             tools:listitem="@layout/adapter_movie_trending" />
 
-                        <ProgressBar
-                            android:id="@+id/loading_trending"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:visibility="gone" />
-
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_status_trending"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:padding="@dimen/positive_10dp"
+                            android:text="@{Binding.getErrorMessage(viewModel.status)}"
                             android:textColor="#3E4A59"
                             android:textSize="@dimen/text_size_12sp"
-                            android:visibility="gone"
-                            tools:text="Error rồi"
-                            tools:visibility="visible" />
+                            android:visibility="@{viewModel.status.errorState != null ? View.VISIBLE : View.GONE}"
+                            tools:text="Error rồi" />
+
+                        <ProgressBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:visibility="@{viewModel.status.status == Status.LOADING ? View.VISIBLE : View.GONE}" />
                     </FrameLayout>
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -156,26 +152,6 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@+id/title_genre">
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_status_genre"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:padding="@dimen/positive_10dp"
-                            android:text="@{view.getErrorMessage(viewModel.status)}"
-                            android:textColor="#3E4A59"
-                            android:textSize="@dimen/text_size_12sp"
-                            android:visibility="@{viewModel.status.errorState != null ? View.VISIBLE : View.GONE}"
-                            tools:text="Error rồi" />
-
-                        <ProgressBar
-                            android:id="@+id/loading_genre"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:visibility="@{viewModel.status.status == Status.LOADING ? View.VISIBLE : View.GONE}" />
-
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_genre"
                             android:layout_width="match_parent"
@@ -183,6 +159,24 @@
                             android:orientation="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             tools:listitem="@layout/adapter_genre" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:padding="@dimen/positive_10dp"
+                            android:text="@{Binding.getErrorMessage(viewModel.status)}"
+                            android:textColor="#3E4A59"
+                            android:textSize="@dimen/text_size_12sp"
+                            android:visibility="@{viewModel.status.errorState != null ? View.VISIBLE : View.GONE}"
+                            tools:text="Error rồi" />
+
+                        <ProgressBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:visibility="@{viewModel.status.status == Status.LOADING ? View.VISIBLE : View.GONE}" />
                     </FrameLayout>
 
                     <androidx.appcompat.widget.AppCompatTextView

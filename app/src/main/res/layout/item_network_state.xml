@@ -26,22 +26,23 @@
         <import type="tran.nam.state.Status" />
 
         <import type="android.view.View" />
+
+        <import type="nam.tran.moviedb.binding.Binding" />
     </data>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="@dimen/positive_5dp">
+        android:padding="@dimen/positive_20dp">
 
         <TextView
             android:id="@+id/error_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@{state.errorState.message ?? ``}"
+            android:text="@{Binding.getErrorMessage(state)}"
             android:visibility="@{state.errorState != null ? View.VISIBLE : View.GONE}" />
 
         <include
@@ -49,8 +50,8 @@
             layout="@layout/include_progress_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:visibility="visible"
-            android:visibility="@{state.status == Status.LOADING ? View.VISIBLE : View.GONE}" />
+            android:visibility="@{state.status == Status.LOADING ? View.VISIBLE : View.GONE}"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/retry_button"
