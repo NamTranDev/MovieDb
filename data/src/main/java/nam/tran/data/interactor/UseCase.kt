@@ -2,17 +2,14 @@ package nam.tran.data.interactor
 
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
-import io.reactivex.functions.Function5
+import io.reactivex.functions.Function4
 import nam.tran.data.api.IApi
-import nam.tran.data.model.GenreModel
-import nam.tran.data.model.HomeMovieModel
-import nam.tran.data.model.MovieModel
-import tran.nam.common.Logger
+import nam.tran.data.model.*
 import javax.inject.Inject
 
-class HomeUseCase @Inject constructor(
+class UseCase @Inject constructor(
     private val iApi: IApi
-) : IHomeUseCase {
+) : IUseCase {
 
     val apiKey = "a7b3c9975791294647265c71224a88ad"
     val language = "en-US"
@@ -54,6 +51,43 @@ class HomeUseCase @Inject constructor(
         return iApi.upcomings(apiKey, language, page).map {
             it.results
         }
+    }
+
+    override fun loadDetail(id: Long): Observable<MovieDetailModel> {
+        return Observable.zip(
+            iApi.movieDetail(id, apiKey, language),
+            videoDetail(id),
+            reviewDetail(id),
+            recommendationDetail(id),
+            Function4 { movie, video, review, recommendation ->
+                movie.videos = video
+                movie.reviews = review
+                movie.recommendations = recommendation
+                movie
+            }
+        )
+    }
+
+    override fun videoDetail(id: Long): Observable<MutableList<VideoModel>> {
+        return iApi.videoDetail(id, apiKey, language).map {
+            it.videos
+        }
+    }
+
+    override fun reviewDetail(id: Long): Observable<MutableList<ReviewModel>> {
+        return iApi.reviewDetail(id, apiKey, language, 1).map {
+            it.reviews
+        }.filter {
+            it.size > 2
+        }.takeLast(3)
+    }
+
+    override fun recommendationDetail(id: Long): Observable<MutableList<RecommendationModel>> {
+        return iApi.recommendationDetail(id, apiKey, language, 1).map {
+            it.recommendations
+        }.filter {
+            it.size > 3
+        }.takeLast(3)
     }
 
 }

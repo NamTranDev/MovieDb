@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
-import nam.tran.data.interactor.IHomeUseCase
+import nam.tran.data.interactor.IUseCase
 import nam.tran.data.model.GenreModel
 import nam.tran.data.model.MovieModel
 import tran.nam.core.viewmodel.BaseViewModel
@@ -14,7 +14,7 @@ import tran.nam.state.Loading
 import tran.nam.state.State
 import java.util.concurrent.Executors
 
-class HomeViewModel constructor(private val mUseCase: IHomeUseCase) : BaseViewModel() {
+class HomeViewModel constructor(private val mUseCase: IUseCase) : BaseViewModel() {
 
     var requestPopular = MutableLiveData<MovieRequest>()
     var requestTopRated = MutableLiveData<MovieRequest>()

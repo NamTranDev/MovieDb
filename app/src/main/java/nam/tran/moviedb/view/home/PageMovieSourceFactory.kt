@@ -4,13 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.DataSource
 import io.reactivex.disposables.CompositeDisposable
-import nam.tran.data.interactor.IHomeUseCase
+import nam.tran.data.interactor.IUseCase
 import nam.tran.data.model.MovieModel
 import tran.nam.common.Logger
 
 class PageMovieSourceFactory constructor(
     private val request: MovieRequest,
-    private val mUseCase: IHomeUseCase,
+    private val mUseCase: IUseCase,
     private val mCompositeDisposable: CompositeDisposable
 ) : DataSource.Factory<Int, MovieModel>() {
 

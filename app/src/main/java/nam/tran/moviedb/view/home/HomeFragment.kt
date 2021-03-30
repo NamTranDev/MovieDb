@@ -5,13 +5,14 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_home.*
 import nam.tran.data.model.MovieModel
 import nam.tran.moviedb.R
 import nam.tran.moviedb.binding.Binding.getErrorMessage
 import nam.tran.moviedb.databinding.FragmentHomeBinding
-import tran.nam.common.ErrorCode
+import nam.tran.moviedb.view.detail.DetailFragment.Companion.ARG_MOVIE_ID
 import tran.nam.core.biding.FragmentDataBindingComponent
 import tran.nam.core.view.mvvm.BaseFragmentVM
 import tran.nam.state.State
@@ -104,8 +105,10 @@ class HomeFragment : BaseFragmentVM<FragmentHomeBinding, HomeViewModel>() {
 
     }
 
-    fun goToDetail(movie: MovieModel) {
-
+    private fun goToDetail(movie: MovieModel) {
+        findNavController().navigate(R.id.action_homeFragment_to_detailFragment, Bundle().apply {
+            putLong(ARG_MOVIE_ID, movie.id)
+        })
     }
 
     private fun updateStatus(

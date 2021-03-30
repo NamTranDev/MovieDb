@@ -3,8 +3,8 @@ package nam.tran.data.di
 import dagger.Binds
 import dagger.Module
 import nam.tran.data.api.NetModule
-import nam.tran.data.interactor.HomeUseCase
-import nam.tran.data.interactor.IHomeUseCase
+import nam.tran.data.interactor.UseCase
+import nam.tran.data.interactor.IUseCase
 import nam.tran.data.local.PreferenceModule
 import javax.inject.Singleton
 
@@ -14,5 +14,5 @@ abstract class DataModule {
 
     @Binds
     @Singleton
-    internal abstract fun provideHomeUseCase(usecase: HomeUseCase): IHomeUseCase
+    internal abstract fun provideHomeUseCase(usecase: UseCase): IUseCase
 }

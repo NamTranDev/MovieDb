@@ -5,7 +5,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import nam.tran.data.interactor.IHomeUseCase
+import nam.tran.data.interactor.IUseCase
 import nam.tran.data.model.MovieModel
 import tran.nam.common.ErrorResponse
 import tran.nam.common.ErrorState
@@ -15,7 +15,7 @@ import tran.nam.state.State
 
 class PageMovieDataSource constructor(
     val request: MovieRequest,
-    private val mUseCase: IHomeUseCase,
+    private val mUseCase: IUseCase,
     private val mCompositeDisposable: CompositeDisposable
 ) : PageKeyedDataSource<Int, MovieModel>() {
 

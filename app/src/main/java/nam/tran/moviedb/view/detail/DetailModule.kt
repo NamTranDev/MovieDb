@@ -1,4 +1,4 @@
-package nam.tran.moviedb.view.home
+package nam.tran.moviedb.view.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -10,20 +10,20 @@ import dagger.multibindings.IntoMap
 import nam.tran.data.interactor.IUseCase
 import tran.nam.core.di.inject.ViewModelKey
 
-@Module(includes = [HomeModule.ProvideViewModel::class])
-abstract class HomeModule {
+@Module(includes = [DetailModule.ProvideViewModel::class])
+abstract class DetailModule {
 
     @ContributesAndroidInjector(modules = [InjectViewModel::class])
-    abstract fun bind(): HomeFragment
+    abstract fun bind(): DetailFragment
 
     @Module
     class ProvideViewModel {
 
         @Provides
         @IntoMap
-        @ViewModelKey(HomeViewModel::class)
-        fun provideViewModel(useCase : IUseCase): ViewModel =
-            HomeViewModel(useCase)
+        @ViewModelKey(DetailViewModel::class)
+        fun provideViewModel(usecase : IUseCase): ViewModel =
+            DetailViewModel(usecase)
     }
 
     @Module
@@ -31,8 +31,8 @@ abstract class HomeModule {
         @Provides
         fun provideViewModel(
             factory: ViewModelProvider.Factory,
-            target: HomeFragment
+            target: DetailFragment
         ) =
-            ViewModelProviders.of(target, factory).get(HomeViewModel::class.java)
+            ViewModelProviders.of(target, factory).get(DetailViewModel::class.java)
     }
 }

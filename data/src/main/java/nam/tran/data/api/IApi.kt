@@ -1,9 +1,9 @@
 package nam.tran.data.api
 
 import io.reactivex.Observable
-import nam.tran.data.model.GenreResponse
-import nam.tran.data.model.MovieResponse
+import nam.tran.data.model.*
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface IApi {
@@ -36,4 +36,34 @@ interface IApi {
         @Query("language") language: String,
         @Query("page") page: Int
     ): Observable<MovieResponse>
+
+    @GET("/3/movie/{movie_id}")
+    fun movieDetail(
+        @Path("movie_id") id: Long,
+        @Query("api_key") key: String,
+        @Query("language") language: String
+    ): Observable<MovieDetailModel>
+
+    @GET("/3/movie/{movie_id}/videos")
+    fun videoDetail(
+        @Path("movie_id") id: Long,
+        @Query("api_key") key: String,
+        @Query("language") language: String
+    ): Observable<VideoResponse>
+
+    @GET("/3/movie/{movie_id}/reviews")
+    fun reviewDetail(
+        @Path("movie_id") id: Long,
+        @Query("api_key") key: String,
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Observable<ReviewResponse>
+
+    @GET("/3/movie/{movie_id}/recommendations")
+    fun recommendationDetail(
+        @Path("movie_id") id: Long,
+        @Query("api_key") key: String,
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Observable<RecommendationResponse>
 }

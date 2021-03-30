@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/image"
             app:cardCornerRadius="@dimen/positive_5dp"
-            app:cardElevation="@dimen/positive_20dp"
+            app:cardElevation="@dimen/positive_15dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
