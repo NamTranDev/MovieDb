@@ -31,8 +31,8 @@ object Binding {
     }
 
     @JvmStatic
-    @BindingAdapter(value = ["app:link"], requireAll = false)
-    fun loadImage(view: ImageView, link: String?) {
+    @BindingAdapter(value = ["app:link","app:isBackground"], requireAll = false)
+    fun loadImage(view: ImageView, link: String?,isBackground : Boolean = false) {
         link?.run {
             if (link.isEmpty()) {
                 return@run
@@ -48,7 +48,8 @@ object Binding {
                     .diskCacheStrategyOf(DiskCacheStrategy.AUTOMATIC)
                     .placeholder(circularProgressDrawable)
 
-                Glide.with(view.context).load("https://image.tmdb.org/t/p/w342" + link)
+                val size = if (isBackground) "w500" else "w342"
+                Glide.with(view.context).load("https://image.tmdb.org/t/p/$size$link")
                     .apply(reqOpt).into(view)
             } catch (e: Exception) {
                 Logger.debug(e)

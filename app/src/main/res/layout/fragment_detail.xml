@@ -1,8 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+        <variable
+            name="viewModel"
+            type="nam.tran.moviedb.view.detail.DetailViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:background="@android:color/black">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/background"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/positive_200dp"
+                android:scaleType="matrix"
+                app:layout_constraintTop_toTopOf="parent"
+                app:link="@{viewModel.mDetail.background}"
+                app:isBackground="@{true}"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/background"
+                app:layout_constraintStart_toStartOf="@+id/background"
+                app:layout_constraintBottom_toBottomOf="@+id/background"
+                app:layout_constraintTop_toTopOf="@+id/background"
+                app:srcCompat="@drawable/ic_play_blue" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/positive_5dp"
+                android:scaleType="centerInside"
+                android:layout_margin="@dimen/positive_10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/ic_back"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_140dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="@dimen/positive_20dp"
+                app:cardCornerRadius="@dimen/positive_5dp"
+                app:cardElevation="@dimen/positive_5dp">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/positive_100dp"
+                    android:layout_height="@dimen/positive_150dp"
+                    android:scaleType="centerCrop"
+                    app:link="@{viewModel.mDetail.image}"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5.0"
+                android:textStyle="bold"
+                android:layout_margin="@dimen/positive_10dp"
+                android:textSize="@dimen/text_size_15sp"
+                android:textColor="#F1CA23"
+                app:layout_constraintTop_toBottomOf="@+id/background"
+                app:layout_constraintStart_toEndOf="@+id/image"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratingbar"
+                android:layout_marginStart="@dimen/positive_10dp"
+                android:progressDrawable="@drawable/rating_bar"
+                style="@style/ratingBar"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_rating"
+                app:layout_constraintStart_toEndOf="@+id/tv_rating"
+                app:layout_constraintTop_toTopOf="@+id/tv_rating" />
+
+<!--            <include layout="@layout/loading_state"-->
+<!--                app:state="@{viewModel.status}"/>-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>
