@@ -6,13 +6,16 @@ import androidx.annotation.Dimension
 import kotlinx.android.synthetic.main.fragment_detail.*
 import nam.tran.moviedb.R
 import nam.tran.moviedb.databinding.FragmentDetailBinding
+import tran.nam.core.biding.FragmentDataBindingComponent
 import tran.nam.core.view.mvvm.BaseFragmentVM
 
 class DetailFragment : BaseFragmentVM<FragmentDetailBinding, DetailViewModel>() {
 
-    companion object{
+    companion object {
         const val ARG_MOVIE_ID = "ARG: Movie id"
     }
+
+    private val dataBindingComponent = FragmentDataBindingComponent(this)
 
     override val layoutId: Int
         get() = R.layout.fragment_detail
@@ -21,7 +24,6 @@ class DetailFragment : BaseFragmentVM<FragmentDetailBinding, DetailViewModel>() 
         super.onViewCreated(view, savedInstanceState)
 
         mViewDataBinding?.viewModel = mViewModel
-        ratingbar?.numStars = 5
-        ratingbar?.rating = 3f
+        rv_category?.adapter = CategoryAdapter(dataBindingComponent)
     }
 }

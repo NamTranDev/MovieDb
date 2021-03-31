@@ -6,11 +6,14 @@ import android.graphics.drawable.StateListDrawable
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import nam.tran.data.model.CategoryModel
 import nam.tran.moviedb.R
+import nam.tran.moviedb.view.detail.CategoryAdapter
 import tran.nam.common.ErrorCode
 import tran.nam.common.Logger
 import tran.nam.state.State
@@ -70,6 +73,23 @@ object Binding {
 //            val sld = StateListDrawable()
 //            sld.addState(intArrayOf(android.R.attr.startColor, android.R.attr.endColor), draw)
             view.background = draw
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter(
+        value = ["app:listCategory"],
+        requireAll = false
+    )
+    fun loadContent(
+        rv: RecyclerView,
+        listChannel: MutableList<CategoryModel>?
+    ){
+        val adapter = rv.adapter
+        listChannel?.run {
+            if (adapter is CategoryAdapter) {
+                adapter.submitList(this)
+            }
         }
     }
 }
