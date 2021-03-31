@@ -25,5 +25,13 @@ class DetailFragment : BaseFragmentVM<FragmentDetailBinding, DetailViewModel>() 
 
         mViewDataBinding?.viewModel = mViewModel
         rv_category?.adapter = CategoryAdapter(dataBindingComponent)
+
+        tv_more?.setOnClickListener {
+            if (tv_description?.isExpanded == true) {
+                tv_description?.collapse()
+            } else {
+                tv_description?.expand()
+            }
+        }
     }
 }

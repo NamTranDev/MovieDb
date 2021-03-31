@@ -5,6 +5,7 @@ import io.reactivex.functions.BiFunction
 import io.reactivex.functions.Function4
 import nam.tran.data.api.IApi
 import nam.tran.data.model.*
+import tran.nam.common.Logger
 import javax.inject.Inject
 
 class UseCase @Inject constructor(
@@ -60,6 +61,7 @@ class UseCase @Inject constructor(
             reviewDetail(id),
             recommendationDetail(id),
             Function4 { movie, video, review, recommendation ->
+                Logger.debug("loadDetail")
                 movie.videos = video
                 movie.reviews = review
                 movie.recommendations = recommendation
@@ -77,16 +79,12 @@ class UseCase @Inject constructor(
     override fun reviewDetail(id: Long): Observable<MutableList<ReviewModel>> {
         return iApi.reviewDetail(id, apiKey, language, 1).map {
             it.reviews
-        }.filter {
-            it.size > 2
         }.takeLast(3)
     }
 
     override fun recommendationDetail(id: Long): Observable<MutableList<RecommendationModel>> {
         return iApi.recommendationDetail(id, apiKey, language, 1).map {
             it.recommendations
-        }.filter {
-            it.size > 3
         }.takeLast(3)
     }
 

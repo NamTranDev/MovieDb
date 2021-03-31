@@ -5,9 +5,11 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import at.blogc.android.views.ExpandableTextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
@@ -90,6 +92,22 @@ object Binding {
             if (adapter is CategoryAdapter) {
                 adapter.submitList(this)
             }
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter(
+        value = ["app:textExpand","app:readMore"],
+        requireAll = false
+    )
+    fun expand(expand : ExpandableTextView,textExpand : String?,text : TextView){
+        textExpand?.run {
+            expand.text = textExpand
+            expand.postDelayed({
+                if (!expand.isExpanded){
+                    text.visibility = View.VISIBLE
+                }
+            },100)
         }
     }
 }

@@ -18,7 +18,7 @@ class DetailViewModel constructor(private val mUseCase : IUseCase) : BaseViewMod
             execute<MovieDetailModel>(mUseCase.loadDetail(this),{
                 Logger.debug(it)
                 mDetail.set(it)
-            },typeLoading = Loading.LOADING_NORMAL)
+            })
         }
     }
 }
