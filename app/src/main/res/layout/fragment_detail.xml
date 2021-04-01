@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:background="#F2F2F2">
+            tools:background="@android:color/white">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/background"
@@ -140,21 +140,92 @@
                 android:layout_margin="@dimen/positive_10dp"
                 android:ellipsize="end"
                 android:maxLines="5"
-                app:textExpand="@{viewModel.mDetail.description}"
-                app:readMore="@{tvMore}"
                 app:animation_duration="750"
-                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                app:readMore="@{tvMore}"
+                app:textExpand="@{viewModel.mDetail.description}" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/positive_10dp"
                 android:text="Read more"
                 android:textColor="#007AD9"
                 android:visibility="gone"
-                android:id="@+id/tv_more"
                 app:layout_constraintEnd_toEndOf="@+id/tv_description"
                 app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/background_fav"
+                app:layout_constraintTop_toTopOf="@+id/tv_fav"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_fav"
+                app:layout_constraintStart_toStartOf="@+id/tv_fav"
+                app:layout_constraintEnd_toEndOf="@+id/iv_arrow"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_plus"
+                android:drawablePadding="@dimen/positive_15dp"
+                android:gravity="center"
+                android:paddingStart="@dimen/positive_10dp"
+                android:paddingTop="@dimen/positive_8dp"
+                android:paddingEnd="@dimen/positive_20dp"
+                android:paddingBottom="@dimen/positive_8dp"
+                android:text="Favotite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_more" />
+
+            <View
+                android:id="@+id/line_fav"
+                android:layout_width="@dimen/positive_1dp"
+                android:layout_height="@dimen/positive_15dp"
+                android:background="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_fav"
+                app:layout_constraintStart_toEndOf="@+id/tv_fav"
+                app:layout_constraintTop_toTopOf="@+id/tv_fav" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/iv_arrow"
+                app:srcCompat="@drawable/ic_arrow"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_fav"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="@+id/line_fav"
+                app:layout_constraintTop_toTopOf="@+id/tv_fav" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your Rate"
+                android:textStyle="bold"
+                android:id="@+id/title_rate"
+                android:padding="@dimen/positive_10dp"
+                android:background="#F8F8F8"
+                android:textColor="#4A4A4A"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_fav"
+                android:layout_marginTop="@dimen/positive_20dp"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/rate"
+                style="@style/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/positive_5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:numStars="5"
+                app:layout_constraintTop_toBottomOf="@+id/title_rate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:rating="3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

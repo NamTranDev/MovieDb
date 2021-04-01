@@ -2,8 +2,9 @@ package nam.tran.moviedb.binding
 
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.StateListDrawable
+import android.text.Layout
 import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -103,11 +104,17 @@ object Binding {
     fun expand(expand : ExpandableTextView,textExpand : String?,text : TextView){
         textExpand?.run {
             expand.text = textExpand
-            expand.postDelayed({
-                if (!expand.isExpanded){
-                    text.visibility = View.VISIBLE
+            expand.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    expand.viewTreeObserver.removeOnPreDrawListener(this)
+                    expand.layout?.run {
+                        val lines = lineCount
+                        if (lines > 0 && getEllipsisCount(lines - 1) > 0)
+                            text.visibility = View.VISIBLE
+                    }
+                    return true
                 }
-            },100)
+            });
         }
     }
 }
