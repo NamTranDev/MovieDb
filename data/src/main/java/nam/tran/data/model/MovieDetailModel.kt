@@ -16,7 +16,7 @@ data class MovieDetailModel(
     @SerializedName("genres") val categorys: MutableList<CategoryModel>,
     var videos: MutableList<VideoModel>?,
     var reviews: MutableList<ReviewModel>?,
-    var recommendations: MutableList<RecommendationModel>?
+    var recommendations: MutableList<MovieModel>?
 ) {
     fun getDate(): String {
         val parser = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)

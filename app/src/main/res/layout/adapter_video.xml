@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="nam.tran.data.model.VideoModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/positive_5dp"
+        android:layout_marginStart="@dimen/positive_10dp"
+        android:layout_marginEnd="@dimen/positive_5dp"
+        app:cardCornerRadius="@dimen/positive_5dp"
+        app:cardElevation="@dimen/positive_5dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/positive_180dp"
+            android:layout_height="@dimen/positive_110dp"
+            android:scaleType="matrix"
+            android:adjustViewBounds="true"
+            app:videoId="@{item.key}"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="center"
+            app:srcCompat="@drawable/ic_play_video"/>
+    </androidx.cardview.widget.CardView>
+</layout>

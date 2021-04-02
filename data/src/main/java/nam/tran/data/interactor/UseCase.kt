@@ -79,13 +79,13 @@ class UseCase @Inject constructor(
     override fun reviewDetail(id: Long): Observable<MutableList<ReviewModel>> {
         return iApi.reviewDetail(id, apiKey, language, 1).map {
             it.reviews
-        }.takeLast(3)
+        }.take(3)
     }
 
-    override fun recommendationDetail(id: Long): Observable<MutableList<RecommendationModel>> {
+    override fun recommendationDetail(id: Long): Observable<MutableList<MovieModel>> {
         return iApi.recommendationDetail(id, apiKey, language, 1).map {
             it.recommendations
-        }.takeLast(3)
+        }.take(3)
     }
 
 }

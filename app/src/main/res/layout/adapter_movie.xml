@@ -7,6 +7,9 @@
         <variable
             name="item"
             type="nam.tran.data.model.MovieModel" />
+        <variable
+            name="isRecommend"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/positive_10dp"
         android:layout_marginEnd="@dimen/positive_5dp"
-        android:layout_margin="@dimen/positive_5dp"
+        android:layout_marginTop="@dimen/positive_5dp"
+        android:layout_marginBottom="@dimen/positive_5dp"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView

@@ -11,9 +11,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="@dimen/positive_250dp"
         android:layout_height="@dimen/positive_160dp"
+        android:layout_marginTop="@dimen/positive_5dp"
+        android:layout_marginBottom="@dimen/positive_5dp"
         android:layout_marginStart="@dimen/positive_10dp"
         android:layout_marginEnd="@dimen/positive_5dp"
-        android:layout_margin="@dimen/positive_5dp"
         app:cardCornerRadius="@dimen/positive_5dp"
         app:cardElevation="@dimen/positive_5dp">
 

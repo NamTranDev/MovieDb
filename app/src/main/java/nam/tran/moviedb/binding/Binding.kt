@@ -15,8 +15,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import nam.tran.data.model.CategoryModel
+import nam.tran.data.model.MovieModel
+import nam.tran.data.model.ReviewModel
+import nam.tran.data.model.VideoModel
 import nam.tran.moviedb.R
 import nam.tran.moviedb.view.detail.CategoryAdapter
+import nam.tran.moviedb.view.detail.MovieAdapter
+import nam.tran.moviedb.view.detail.VideoAdapter
 import tran.nam.common.ErrorCode
 import tran.nam.common.Logger
 import tran.nam.state.State
@@ -64,6 +69,32 @@ object Binding {
     }
 
     @JvmStatic
+    @BindingAdapter(value = ["app:videoId"], requireAll = false)
+    fun loadThumbnail(view: ImageView, videoId: String?) {
+        videoId?.run {
+            if (videoId.isEmpty()) {
+                return@run
+            }
+            try {
+                val circularProgressDrawable = CircularProgressDrawable(view.context)
+                circularProgressDrawable.strokeWidth = 5f
+                circularProgressDrawable.centerRadius = 30f
+                circularProgressDrawable.setColorSchemeColors(Color.WHITE)
+                circularProgressDrawable.start()
+
+                val reqOpt = RequestOptions
+                    .diskCacheStrategyOf(DiskCacheStrategy.AUTOMATIC)
+                    .placeholder(circularProgressDrawable)
+
+                Glide.with(view.context).load("http://img.youtube.com/vi/$videoId/hqdefault.jpg")
+                    .apply(reqOpt).into(view)
+            } catch (e: Exception) {
+                Logger.debug(e)
+            }
+        }
+    }
+
+    @JvmStatic
     @BindingAdapter(value = ["app:loadbackgroundColor"], requireAll = false)
     fun loadbackgroundColor(view: View, color: Int?) {
         color?.run {
@@ -73,24 +104,38 @@ object Binding {
             )
             draw.setColor(color)
             draw.cornerRadius = view.resources.getDimension(R.dimen.positive_10dp)
-//            val sld = StateListDrawable()
-//            sld.addState(intArrayOf(android.R.attr.startColor, android.R.attr.endColor), draw)
             view.background = draw
         }
     }
 
     @JvmStatic
     @BindingAdapter(
-        value = ["app:listCategory"],
+        value = ["app:listCategory","app:listVideo","app:listReview","app:recommendation"],
         requireAll = false
     )
     fun loadContent(
         rv: RecyclerView,
-        listChannel: MutableList<CategoryModel>?
+        listChannel: MutableList<CategoryModel>?,
+        listVideo: MutableList<VideoModel>?,
+        listReview: MutableList<ReviewModel>?,
+        listRecommendation: MutableList<MovieModel>?
     ){
         val adapter = rv.adapter
         listChannel?.run {
             if (adapter is CategoryAdapter) {
+                adapter.submitList(this)
+            }
+        }
+        listVideo?.run {
+            if (adapter is VideoAdapter) {
+                adapter.submitList(this)
+            }
+        }
+        listReview?.run {
+
+        }
+        listRecommendation?.run {
+            if (adapter is MovieAdapter) {
                 adapter.submitList(this)
             }
         }

@@ -290,9 +290,12 @@
                 android:id="@+id/rv_video"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_5dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/title_video" />
+                app:layout_constraintTop_toBottomOf="@+id/title_video"
+                app:listVideo="@{viewModel.mDetail.videos}"
+                tools:listitem="@layout/adapter_video" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title_review"
@@ -322,7 +325,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/title_review" />
+                app:layout_constraintTop_toBottomOf="@+id/title_review"
+                app:listReview="@{viewModel.mDetail.reviews}" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title_recommend"
@@ -350,9 +354,11 @@
                 android:id="@+id/rv_recommend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/title_recommend" />
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/title_recommend"
+                app:recommendation="@{viewModel.mDetail.recommendations}"
+                app:spanCount="3"
+                tools:listitem="@layout/adapter_movie" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
