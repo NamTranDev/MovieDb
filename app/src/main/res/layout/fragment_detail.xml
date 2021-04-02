@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:background="@android:color/white">
+            android:background="@android:color/white">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/background"
@@ -39,7 +39,6 @@
                 app:srcCompat="@drawable/ic_play_blue" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/appCompatImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/positive_10dp"
@@ -72,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/positive_10dp"
-                android:text="5.0"
+                android:text="4.0"
                 android:textColor="#F1CA23"
                 android:textSize="@dimen/text_size_15sp"
                 android:textStyle="bold"
@@ -81,17 +80,17 @@
 
             <androidx.appcompat.widget.AppCompatRatingBar
                 android:id="@+id/ratingbar"
-                style="@style/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/positive_5dp"
-                android:clickable="true"
-                android:focusable="true"
+                android:maxHeight="@dimen/positive_24dp"
+                android:minHeight="@dimen/positive_20dp"
                 android:numStars="5"
+                android:progressDrawable="@drawable/ratingbar_small_selector"
+                android:rating="4.0"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_rating"
                 app:layout_constraintStart_toEndOf="@+id/tv_rating"
-                app:layout_constraintTop_toTopOf="@+id/tv_rating"
-                tools:rating="3" />
+                app:layout_constraintTop_toTopOf="@+id/tv_rating" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_time"
@@ -157,18 +156,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_description" />
 
             <View
+                android:id="@+id/view"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/background_fav"
-                app:layout_constraintTop_toTopOf="@+id/tv_fav"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_fav"
+                app:layout_constraintEnd_toEndOf="@+id/iv_arrow"
                 app:layout_constraintStart_toStartOf="@+id/tv_fav"
-                app:layout_constraintEnd_toEndOf="@+id/iv_arrow"/>
+                app:layout_constraintTop_toTopOf="@+id/tv_fav" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_fav"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_10dp"
                 android:drawableStart="@drawable/ic_plus"
                 android:drawablePadding="@dimen/positive_15dp"
                 android:gravity="center"
@@ -178,6 +179,8 @@
                 android:paddingBottom="@dimen/positive_8dp"
                 android:text="Favotite"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/line_fav"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_more" />
 
@@ -187,45 +190,169 @@
                 android:layout_height="@dimen/positive_15dp"
                 android:background="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_fav"
+                app:layout_constraintEnd_toStartOf="@+id/iv_arrow"
                 app:layout_constraintStart_toEndOf="@+id/tv_fav"
                 app:layout_constraintTop_toTopOf="@+id/tv_fav" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_arrow"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:id="@+id/iv_arrow"
-                app:srcCompat="@drawable/ic_arrow"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_fav"
                 app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/line_fav"
-                app:layout_constraintTop_toTopOf="@+id/tv_fav" />
+                app:layout_constraintTop_toTopOf="@+id/tv_fav"
+                app:srcCompat="@drawable/ic_arrow" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title_rate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Your Rate"
-                android:textStyle="bold"
-                android:id="@+id/title_rate"
-                android:padding="@dimen/positive_10dp"
+                android:layout_marginTop="@dimen/positive_20dp"
                 android:background="#F8F8F8"
+                android:padding="@dimen/positive_10dp"
+                android:text="Your Rate"
                 android:textColor="#4A4A4A"
                 android:textSize="@dimen/text_size_14sp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_fav"
-                android:layout_marginTop="@dimen/positive_20dp"/>
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/tv_fav" />
 
             <androidx.appcompat.widget.AppCompatRatingBar
                 android:id="@+id/rate"
-                style="@style/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/positive_5dp"
-                android:clickable="true"
-                android:focusable="true"
+                android:layout_marginTop="@dimen/positive_10dp"
+                android:maxHeight="@dimen/positive_40dp"
+                android:minHeight="@dimen/positive_35dp"
                 android:numStars="5"
-                app:layout_constraintTop_toBottomOf="@+id/title_rate"
-                app:layout_constraintStart_toStartOf="parent"
+                android:progressDrawable="@drawable/ratingbar_large_selector"
+                android:rating="0.0"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:rating="3" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_rate" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_5dp"
+                android:text="0.0"
+                android:textColor="#9B9B9B"
+                android:textSize="@dimen/text_size_16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/rate"
+                app:layout_constraintStart_toStartOf="@+id/rate"
+                app:layout_constraintTop_toBottomOf="@+id/rate" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_5dp"
+                android:background="@drawable/background_comment"
+                android:paddingStart="@dimen/positive_20dp"
+                android:paddingTop="@dimen/positive_5dp"
+                android:paddingEnd="@dimen/positive_20dp"
+                android:paddingBottom="@dimen/positive_5dp"
+                android:text="Write a comment"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/text_size_12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/tv_rate"
+                app:layout_constraintStart_toStartOf="@+id/tv_rate"
+                app:layout_constraintTop_toBottomOf="@+id/tv_rate" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_20dp"
+                android:background="#F8F8F8"
+                android:padding="@dimen/positive_10dp"
+                android:text="Video"
+                android:textColor="#4A4A4A"
+                android:textSize="@dimen/text_size_14sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/tv_comment" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/positive_10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/title_video"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/title_video"
+                app:srcCompat="@drawable/ic_loadmore" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/title_video" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_20dp"
+                android:background="#F8F8F8"
+                android:padding="@dimen/positive_10dp"
+                android:text="Comments"
+                android:textColor="#4A4A4A"
+                android:textSize="@dimen/text_size_14sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/rv_video" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/positive_10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/title_review"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/title_review"
+                app:srcCompat="@drawable/ic_loadmore" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/title_review" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title_recommend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_20dp"
+                android:background="#F8F8F8"
+                android:padding="@dimen/positive_10dp"
+                android:text="Recomendations"
+                android:textColor="#4A4A4A"
+                android:textSize="@dimen/text_size_14sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/rv_review" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/positive_10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/title_recommend"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/title_recommend"
+                app:srcCompat="@drawable/ic_loadmore" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_recommend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/title_recommend" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
