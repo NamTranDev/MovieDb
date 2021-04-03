@@ -13,6 +13,6 @@ interface IUseCase {
 
     fun loadDetail(id: Long): Observable<MovieDetailModel>
     fun videoDetail(id: Long): Observable<MutableList<VideoModel>>
-    fun reviewDetail(id: Long): Observable<MutableList<ReviewModel>>
-    fun recommendationDetail(id: Long): Observable<MutableList<MovieModel>>
+    fun reviewDetail(id: Long): Observable<List<ReviewModel>>
+    fun recommendationDetail(id: Long): Observable<List<MovieModel>>
 }

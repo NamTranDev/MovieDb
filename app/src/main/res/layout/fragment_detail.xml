@@ -358,7 +358,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/title_recommend"
                 app:recommendation="@{viewModel.mDetail.recommendations}"
                 app:spanCount="3"
-                tools:listitem="@layout/adapter_movie" />
+                tools:listitem="@layout/adapter_movie_home" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

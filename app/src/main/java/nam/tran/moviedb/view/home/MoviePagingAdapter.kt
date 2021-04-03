@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import nam.tran.data.model.MovieModel
 import nam.tran.moviedb.R
-import nam.tran.moviedb.databinding.AdapterMovieBinding
+import nam.tran.moviedb.databinding.AdapterMovieHomeBinding
 import nam.tran.moviedb.databinding.ItemNetworkStateBinding
 import tran.nam.state.State
 
@@ -31,11 +31,11 @@ class MoviePagingAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            R.layout.adapter_movie -> {
+            R.layout.adapter_movie_home -> {
                 val holder = MovieViewHolder(
                     DataBindingUtil.inflate(
                         LayoutInflater.from(parent.context),
-                        R.layout.adapter_movie,
+                        R.layout.adapter_movie_home,
                         parent,
                         false,
                         dataBindingComponent
@@ -63,7 +63,7 @@ class MoviePagingAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            R.layout.adapter_movie -> (holder as MovieViewHolder).bind(
+            R.layout.adapter_movie_home -> (holder as MovieViewHolder).bind(
                 getItem(position)
             )
             R.layout.item_network_state -> (holder as NetworkStateItemViewHolder).bind(networkState)
@@ -96,7 +96,7 @@ class MoviePagingAdapter(
         return if (hasExtraRow() && position == itemCount - 1) {
             R.layout.item_network_state
         } else {
-            R.layout.adapter_movie
+            R.layout.adapter_movie_home
         }
     }
 
@@ -110,7 +110,7 @@ class MoviePagingAdapter(
     }
 
     class MovieViewHolder(
-        val binding: AdapterMovieBinding
+        val binding: AdapterMovieHomeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(movie: MovieModel?) {

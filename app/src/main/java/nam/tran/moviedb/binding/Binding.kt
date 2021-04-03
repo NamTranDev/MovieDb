@@ -21,6 +21,7 @@ import nam.tran.data.model.VideoModel
 import nam.tran.moviedb.R
 import nam.tran.moviedb.view.detail.CategoryAdapter
 import nam.tran.moviedb.view.detail.MovieAdapter
+import nam.tran.moviedb.view.detail.ReviewAdapter
 import nam.tran.moviedb.view.detail.VideoAdapter
 import tran.nam.common.ErrorCode
 import tran.nam.common.Logger
@@ -42,8 +43,8 @@ object Binding {
     }
 
     @JvmStatic
-    @BindingAdapter(value = ["app:link","app:isBackground"], requireAll = false)
-    fun loadImage(view: ImageView, link: String?,isBackground : Boolean = false) {
+    @BindingAdapter(value = ["app:link", "app:isBackground"], requireAll = false)
+    fun loadImage(view: ImageView, link: String?, isBackground: Boolean = false) {
         link?.run {
             if (link.isEmpty()) {
                 return@run
@@ -110,7 +111,7 @@ object Binding {
 
     @JvmStatic
     @BindingAdapter(
-        value = ["app:listCategory","app:listVideo","app:listReview","app:recommendation"],
+        value = ["app:listCategory", "app:listVideo", "app:listReview", "app:recommendation"],
         requireAll = false
     )
     fun loadContent(
@@ -119,7 +120,7 @@ object Binding {
         listVideo: MutableList<VideoModel>?,
         listReview: MutableList<ReviewModel>?,
         listRecommendation: MutableList<MovieModel>?
-    ){
+    ) {
         val adapter = rv.adapter
         listChannel?.run {
             if (adapter is CategoryAdapter) {
@@ -132,7 +133,9 @@ object Binding {
             }
         }
         listReview?.run {
-
+            if (adapter is ReviewAdapter) {
+                adapter.submitList(this)
+            }
         }
         listRecommendation?.run {
             if (adapter is MovieAdapter) {
@@ -143,13 +146,14 @@ object Binding {
 
     @JvmStatic
     @BindingAdapter(
-        value = ["app:textExpand","app:readMore"],
+        value = ["app:textExpand", "app:readMore"],
         requireAll = false
     )
-    fun expand(expand : ExpandableTextView,textExpand : String?,text : TextView){
+    fun expand(expand: ExpandableTextView, textExpand: String?, text: TextView) {
         textExpand?.run {
             expand.text = textExpand
-            expand.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+            expand.viewTreeObserver.addOnPreDrawListener(object :
+                ViewTreeObserver.OnPreDrawListener {
                 override fun onPreDraw(): Boolean {
                     expand.viewTreeObserver.removeOnPreDrawListener(this)
                     expand.layout?.run {

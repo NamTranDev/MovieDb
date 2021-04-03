@@ -13,9 +13,9 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/positive_120dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/positive_5dp"
+        android:layout_marginStart="@dimen/positive_10dp"
         android:layout_marginEnd="@dimen/positive_5dp"
         android:layout_marginTop="@dimen/positive_5dp"
         android:layout_marginBottom="@dimen/positive_5dp"
@@ -32,9 +32,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/positive_120dp"
+                android:layout_height="@dimen/positive_160dp"
                 android:scaleType="centerCrop"
-                android:adjustViewBounds="true"
                 app:link="@{item.image}"/>
 
         </androidx.cardview.widget.CardView>

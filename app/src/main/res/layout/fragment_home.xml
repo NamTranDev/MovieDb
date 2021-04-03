@@ -213,7 +213,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/adapter_movie" />
+                            tools:listitem="@layout/adapter_movie_home" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_status_popular"
@@ -270,7 +270,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/adapter_movie" />
+                            tools:listitem="@layout/adapter_movie_home" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_status_top_rated"
@@ -327,7 +327,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/adapter_movie" />
+                            tools:listitem="@layout/adapter_movie_home" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_status_upcoming"

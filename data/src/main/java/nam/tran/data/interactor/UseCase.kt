@@ -6,6 +6,8 @@ import io.reactivex.functions.Function4
 import nam.tran.data.api.IApi
 import nam.tran.data.model.*
 import tran.nam.common.Logger
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class UseCase @Inject constructor(
@@ -76,16 +78,19 @@ class UseCase @Inject constructor(
         }
     }
 
-    override fun reviewDetail(id: Long): Observable<MutableList<ReviewModel>> {
+    override fun reviewDetail(id: Long): Observable<List<ReviewModel>> {
         return iApi.reviewDetail(id, apiKey, language, 1).map {
-            it.reviews
-        }.take(3)
+            it.reviews.slice(0 until 3).sortedByDescending {
+                val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+                sdf.parse(it.time)
+            }
+        }
     }
 
-    override fun recommendationDetail(id: Long): Observable<MutableList<MovieModel>> {
+    override fun recommendationDetail(id: Long): Observable<List<MovieModel>> {
         return iApi.recommendationDetail(id, apiKey, language, 1).map {
-            it.recommendations
-        }.take(3)
+            it.recommendations.slice(0 until 3)
+        }
     }
 
 }

@@ -26,6 +26,7 @@ class DetailFragment : BaseFragmentVM<FragmentDetailBinding, DetailViewModel>() 
         mViewDataBinding?.viewModel = mViewModel
         rv_category?.adapter = CategoryAdapter(dataBindingComponent)
         rv_video?.adapter = VideoAdapter(dataBindingComponent)
+        rv_review?.adapter = ReviewAdapter(dataBindingComponent)
         rv_recommend?.adapter = MovieAdapter(dataBindingComponent)
 
         tv_more?.setOnClickListener {

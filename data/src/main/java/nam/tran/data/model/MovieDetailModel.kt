@@ -2,7 +2,6 @@ package nam.tran.data.model
 
 import com.google.gson.annotations.SerializedName
 import tran.nam.common.Logger
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,15 +14,15 @@ data class MovieDetailModel(
     @SerializedName("release_date") val time: String,
     @SerializedName("genres") val categorys: MutableList<CategoryModel>,
     var videos: MutableList<VideoModel>?,
-    var reviews: MutableList<ReviewModel>?,
-    var recommendations: MutableList<MovieModel>?
+    var reviews: List<ReviewModel>?,
+    var recommendations: List<MovieModel>?
 ) {
     fun getDate(): String {
         val parser = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
         val formatter = SimpleDateFormat("MMMM yyyy", Locale.ENGLISH)
         try {
             return formatter.format(parser.parse(time))
-        }catch (e : Exception){
+        } catch (e: Exception) {
             Logger.debug(e)
         }
         return ""
