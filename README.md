@@ -14,10 +14,15 @@ and adapt with info from https://developers.themoviedb.org/3/getting-started/int
 ## Library reference resources
 
  **AndroidX** : [https://developer.android.com/jetpack/androidx?gclid=CjwKCAjwpKCDBhBPEiwAFgBzj9LgPoJAw9_Qms73gEDuSHEQlp2PliKmLhQuKzUxuTWPoWhVreeuJBoCAccQAvD_BwE&gclsrc=aw.ds]
+ 
  **Dagger** : [https://github.com/google/dagger]
+ 
  **RxJava** : [https://github.com/ReactiveX/RxJava]
+ 
  **Retrofit** : [https://github.com/square/retrofit]
+ 
  **Android Paging** : [https://developer.android.com/topic/libraries/architecture/paging]
+ 
  **Glide** : [https://github.com/bumptech/glide]
  
 ## License
