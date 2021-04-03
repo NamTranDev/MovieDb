@@ -6,6 +6,8 @@ import androidx.annotation.Dimension
 import kotlinx.android.synthetic.main.fragment_detail.*
 import nam.tran.moviedb.R
 import nam.tran.moviedb.databinding.FragmentDetailBinding
+import nam.tran.moviedb.view.main.MainActivity
+import tran.nam.common.Logger
 import tran.nam.core.biding.FragmentDataBindingComponent
 import tran.nam.core.view.mvvm.BaseFragmentVM
 
@@ -35,6 +37,11 @@ class DetailFragment : BaseFragmentVM<FragmentDetailBinding, DetailViewModel>() 
             } else {
                 tv_description?.expand()
             }
+        }
+
+        iv_back?.setOnClickListener {
+            Logger.debug("Back")
+            (activity as? MainActivity)?.onBackPressed()
         }
     }
 }

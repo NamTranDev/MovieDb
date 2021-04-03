@@ -61,7 +61,7 @@ object Binding {
                     .placeholder(circularProgressDrawable)
 
                 val size = if (isBackground) "w500" else "w342"
-                Glide.with(view.context).load("https://image.tmdb.org/t/p/$size$link")
+                Glide.with(view.context).load("https://image.tmdb.org/t/p/original/$link")
                     .apply(reqOpt).into(view)
             } catch (e: Exception) {
                 Logger.debug(e)
