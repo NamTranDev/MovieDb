@@ -1,12 +1,14 @@
-package com.karntrehan.posts.core.testing
+package nam.tran.data.testing
 
 import android.annotation.SuppressLint
 import androidx.annotation.VisibleForTesting
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okio.Okio
+import okio.buffer
+import okio.source
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.nio.charset.StandardCharsets
 import java.util.concurrent.TimeUnit
@@ -42,8 +44,8 @@ object DependencyProvider {
     @SuppressLint("NewApi")
     fun getResponseFromJson(fileName: String): String {
         val inputStream = javaClass.classLoader
-                .getResourceAsStream("api-response/$fileName.json")
-        val source = Okio.buffer(Okio.source(inputStream))
-        return source.readString(StandardCharsets.UTF_8)
+                ?.getResourceAsStream("api-response/$fileName.json")
+        val source = inputStream?.source()?.buffer()
+        return source?.readString(StandardCharsets.UTF_8) ?: ""
     }
 }

@@ -13,11 +13,6 @@ android {
     defaultConfig {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-
-        buildConfigField "String", "LINK_RSS", "\"https://vnexpress.net/rss/tin-moi-nhat.rss\""
-        buildConfigField "String", "DB_KEY", "\"NamTranDev\""
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -37,12 +32,18 @@ android {
     }
 
     sourceSets {
-        androidTest.java.srcDirs += "src/test-common/java"
-        test.java.srcDirs += "src/test-common/java"
+        test.resources.srcDirs += 'src/unitTests/resources'
     }
 
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
+    }
+
+    //For testing
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
     }
 }
 
@@ -54,9 +55,12 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation "junit:junit:$rootProject.junit"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation "org.mockito:mockito-core:$rootProject.mockito_core"
+    testImplementation "org.robolectric:robolectric:4.3"
+    testImplementation "com.squareup.okhttp3:mockwebserver:3.9.0"
+    testImplementation "com.nhaarman:mockito-kotlin:1.5.0"
 
     implementation 'com.google.code.gson:gson:2.8.6'
 
-    testImplementation "org.mockito:mockito-core:$rootProject.mockito_core"
     implementation project(path: ':common')
 }
