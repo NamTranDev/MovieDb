@@ -1,5 +1,6 @@
 package nam.tran.data.api
 
+import android.os.Build
 import nam.tran.data.testing.DependencyProvider
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -9,8 +10,10 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 import java.io.IOException
 
+@Config(sdk = [Build.VERSION_CODES.O_MR1])
 @RunWith(RobolectricTestRunner::class)
 class ApiTest {
 
@@ -45,7 +48,7 @@ class ApiTest {
             .test()
             .run {
                 assertNoErrors()
-                Assert.assertEquals(values().size,20)
+                Assert.assertEquals(valueCount(),1)
             }
     }
 
