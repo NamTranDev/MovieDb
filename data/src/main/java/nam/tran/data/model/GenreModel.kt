@@ -7,7 +7,7 @@ import java.util.*
 data class GenreModel(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
-    var colorRandom: Int?
+    var colorRandom: Int? = null
 ) {
     fun randomColor() {
         val r = Random()

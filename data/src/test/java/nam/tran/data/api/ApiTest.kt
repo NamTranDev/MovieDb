@@ -48,7 +48,7 @@ class ApiTest {
             .test()
             .run {
                 assertNoErrors()
-                Assert.assertEquals(valueCount(),1)
+                Assert.assertEquals(values()[0].results.size,20)
             }
     }
 
