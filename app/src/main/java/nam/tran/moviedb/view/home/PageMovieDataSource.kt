@@ -12,6 +12,7 @@ import tran.nam.common.ErrorState
 import tran.nam.common.Logger
 import tran.nam.common.SingleLiveEvent
 import tran.nam.state.State
+import java.util.concurrent.TimeUnit
 
 class PageMovieDataSource constructor(
     val request: MovieRequest,
@@ -32,11 +33,11 @@ class PageMovieDataSource constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
                 emptyData.postValue(false)
-                networkState.postValue(State.loading())
+                networkState.postValue(State.loading(hasRefresh = request.refresh))
             }.subscribe({
                 Logger.debug(it)
                 networkState.postValue(State.success().apply {
-                    hasRefresh = false
+                    hasRefresh = request.refresh
                 })
                 emptyData.postValue(it.isEmpty())
                 callback.onResult(it, page, page + 1)
@@ -55,6 +56,10 @@ class PageMovieDataSource constructor(
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, MovieModel>) {
+        if (params.key == 3 && request.isHome){
+            callback.onResult(emptyList(), params.key + 1)
+            return
+        }
         mCompositeDisposable.add(obser(params.key).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
@@ -83,13 +88,13 @@ class PageMovieDataSource constructor(
 
     private fun obser(page: Int): Observable<MutableList<MovieModel>> {
         return when (request.type) {
-            MovieType.POPULAR -> {
+            MovieType.POPULAR.value -> {
                 mUseCase.listPopular(page)
             }
-            MovieType.TOPRATE -> {
+            MovieType.TOPRATE.value -> {
                 mUseCase.listTopRated(page)
             }
-            MovieType.UPCOMING -> {
+            else -> {
                 mUseCase.listUpComing(page)
             }
         }

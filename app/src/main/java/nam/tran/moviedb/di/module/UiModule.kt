@@ -6,12 +6,14 @@ import dagger.Module
 import dagger.Provides
 import nam.tran.moviedb.view.detail.DetailModule
 import nam.tran.moviedb.view.home.HomeModule
+import nam.tran.moviedb.view.list.ListMovieModule
 import tran.nam.core.di.AppViewModelFactory
 import javax.inject.Provider
 
 @Module(
     includes = [
         HomeModule::class,
+        ListMovieModule::class,
         DetailModule::class
     ]
 )

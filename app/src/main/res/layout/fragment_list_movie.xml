@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="nam.tran.moviedb.view.list.ListMovieViewModel" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F2F2F2"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="@dimen/positive_5dp"
+            app:cardPreventCornerOverlap="false"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="@dimen/positive_30dp"
+                android:layout_height="@dimen/positive_30dp"
+                android:layout_gravity="start"
+                android:layout_margin="@dimen/positive_8dp"
+                app:srcCompat="@drawable/image_logo" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{viewModel.mTitle}"
+                android:layout_gravity="center"
+                android:textAllCaps="true"
+                android:textSize="@dimen/text_size_15sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                tools:text="Popular"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/pullToRefresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:refreshView="@{viewModel.status}">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_movie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/positive_5dp"
+                    app:spanCount="2"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    tools:listitem="@layout/adapter_movie_list" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <include layout="@layout/loading_state"
+                app:state="@{viewModel.status}"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

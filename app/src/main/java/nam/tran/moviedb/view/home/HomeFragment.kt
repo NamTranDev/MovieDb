@@ -13,6 +13,7 @@ import nam.tran.moviedb.R
 import nam.tran.moviedb.binding.Binding.getErrorMessage
 import nam.tran.moviedb.databinding.FragmentHomeBinding
 import nam.tran.moviedb.view.detail.DetailFragment.Companion.ARG_MOVIE_ID
+import nam.tran.moviedb.view.list.ListMovieFragment
 import tran.nam.core.biding.FragmentDataBindingComponent
 import tran.nam.core.view.mvvm.BaseFragmentVM
 import tran.nam.state.State
@@ -103,6 +104,22 @@ class HomeFragment : BaseFragmentVM<FragmentHomeBinding, HomeViewModel>() {
             tv_status_upcoming?.text = "Not found data"
         })
 
+        iv_more_popular?.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_listNormalFragment,Bundle().apply {
+                putString(ListMovieFragment.ARG_TYPE,MovieType.POPULAR.value)
+                putBoolean(ListMovieFragment.ARG_EPOXY,true)
+            })
+        }
+        iv_more_top_rate?.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_listNormalFragment,Bundle().apply {
+                putString(ListMovieFragment.ARG_TYPE,MovieType.TOPRATE.value)
+            })
+        }
+        iv_more_upcoming?.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_listNormalFragment,Bundle().apply {
+                putString(ListMovieFragment.ARG_TYPE,MovieType.UPCOMING.value)
+            })
+        }
     }
 
     private fun goToDetail(movie: MovieModel) {

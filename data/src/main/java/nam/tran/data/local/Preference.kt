@@ -10,11 +10,7 @@ import javax.inject.Singleton
 @Singleton
 open class Preference @Inject constructor(mApp: Application) : IPreference {
 
-    private val mPref: SharedPreferences
-
-    init {
-        mPref = mApp.getSharedPreferences(SHARED_REFERENCE_NAME, Context.MODE_PRIVATE)
-    }
+    private val mPref: SharedPreferences = mApp.getSharedPreferences(SHARED_REFERENCE_NAME, Context.MODE_PRIVATE)
 
     companion object {
 

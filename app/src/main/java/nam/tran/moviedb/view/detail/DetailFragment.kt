@@ -3,6 +3,7 @@ package nam.tran.moviedb.view.detail
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.Dimension
+import androidx.core.view.drawToBitmap
 import kotlinx.android.synthetic.main.fragment_detail.*
 import nam.tran.moviedb.R
 import nam.tran.moviedb.databinding.FragmentDetailBinding

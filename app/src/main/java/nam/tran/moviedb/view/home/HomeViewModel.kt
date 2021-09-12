@@ -102,9 +102,9 @@ class HomeViewModel constructor(private val mUseCase: IUseCase) : BaseViewModel(
 
     override fun onInitialized(bundle: Bundle?, isRefresh: Boolean) {
         if (requestPopular.value == null || requestTopRated.value == null || requestUpcoming.value == null || isRefresh) {
-            requestPopular.value = MovieRequest(MovieType.POPULAR)
-            requestTopRated.value = MovieRequest(MovieType.TOPRATE)
-            requestUpcoming.value = MovieRequest(MovieType.UPCOMING)
+            requestPopular.value = MovieRequest(MovieType.POPULAR.value)
+            requestTopRated.value = MovieRequest(MovieType.TOPRATE.value)
+            requestUpcoming.value = MovieRequest(MovieType.UPCOMING.value)
             execute<Pair<MutableList<MovieModel>, MutableList<GenreModel>>>(
                 mUseCase.trendingAndGenre(),
                 {

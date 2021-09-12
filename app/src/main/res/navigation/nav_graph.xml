@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_listNormalFragment"
+            app:destination="@id/listNormalFragment" />
     </fragment>
 
     <fragment
@@ -21,4 +24,14 @@
         android:name="nam.tran.moviedb.view.detail.DetailFragment"
         android:label="DetailFragment"
         tools:layout="@layout/fragment_detail"/>
+
+    <fragment
+        android:id="@+id/listNormalFragment"
+        android:name="nam.tran.moviedb.view.list.ListMovieFragment"
+        android:label="ListNormalFragment"
+        tools:layout="@layout/fragment_list_movie">
+        <action
+            android:id="@+id/action_listNormalFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 </navigation>

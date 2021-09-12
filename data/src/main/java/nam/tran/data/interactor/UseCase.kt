@@ -79,17 +79,24 @@ class UseCase @Inject constructor(
     }
 
     override fun reviewDetail(id: Long): Observable<List<ReviewModel>> {
-        return iApi.reviewDetail(id, apiKey, language, 1).map {
-            it.reviews.slice(0 until 3).sortedByDescending {
-                val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
-                sdf.parse(it.time)
+        return iApi.reviewDetail(id, apiKey, language, 1).map { it ->
+            if (it.reviews.size > 3) {
+                it.reviews.slice(0 until 3).sortedByDescending {
+                    val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+                    sdf.parse(it.time)
+                }
+            } else {
+                it.reviews
             }
         }
     }
 
     override fun recommendationDetail(id: Long): Observable<List<MovieModel>> {
         return iApi.recommendationDetail(id, apiKey, language, 1).map {
-            it.recommendations.slice(0 until 3)
+            if (it.recommendations.size > 3)
+                it.recommendations.slice(0 until 3)
+            else
+                it.recommendations
         }
     }
 
